@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium Hotel Booking</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f8f9fa;
+        }
+        
+        .header-container {
+            background: linear-gradient(135deg, #2c3e50, #4a6491);
+            color: white;
+            padding: 25px 30px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header-container::after {
+            content: "";
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 100%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
+            transform: rotate(30deg);
+        }
+        
+        .heading {
+            font-size: 32px;
+            font-weight: 700;
+            margin: 0;
+            letter-spacing: 1px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .subheading {
+            font-size: 16px;
+            opacity: 0.9;
+            margin-top: 8px;
+            font-weight: 300;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hotel-page {
+            display: none;
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            margin-bottom: 30px;
+        }
+        
+        .hotel-page.active {
+            display: block;
+        }
+        
+        .hotel-header {
+            display: flex;
+            gap: 25px;
+            margin-bottom: 20px;
+        }
+        
+        .hotel-main-image {
+            width: 40%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        .hotel-info {
+            flex: 1;
+        }
+        
+        .hotel-name {
+            font-size: 28px;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        
+        .location {
+            color: #555;
+            margin-bottom: 15px;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .location i {
+            margin-right: 8px;
+            color: #4a6491;
+        }
+        
+        .rating {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .stars {
+            color: #FFD700;
+            margin-right: 15px;
+        }
+        
+        .price {
+            font-size: 24px;
+            font-weight: 700;
+            color: #2c3e50;
+        }
+        
+        .price small {
+            font-size: 16px;
+            font-weight: normal;
+            color: #777;
+        }
+        
+        .gallery {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 25px;
+            overflow-x: auto;
+            padding-bottom: 10px;
+        }
+        
+        .gallery-image {
+            width: 150px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        
+        .gallery-image:hover {
+            transform: scale(1.05);
+        }
+        
+        .amenities-section {
+            margin-bottom: 25px;
+        }
+        
+        .section-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            padding-bottom: 5px;
+            border-bottom: 2px solid #f0f4f8;
+        }
+        
+        .amenities {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .amenity {
+            background: #f0f4f8;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .amenity i {
+            margin-right: 8px;
+            color: #4a6491;
+        }
+        
+        .description {
+            line-height: 1.6;
+            color: #555;
+            margin-bottom: 25px;
+        }
+        
+        .action-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+        
+        .nav-button {
+            background: linear-gradient(135deg, #4a6491, #2c3e50);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 3px 8px rgba(74, 100, 145, 0.3);
+            text-decoration: none;
+        }
+        
+        .nav-button:hover {
+            background: linear-gradient(135deg, #2c3e50, #4a6491);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 12px rgba(74, 100, 145, 0.4);
+        }
+        
+        .nav-button i {
+            margin-right: 8px;
+        }
+        
+        .book-button {
+            background: linear-gradient(135deg, #4CAF50, #2E7D32);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 18px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 3px 8px rgba(76, 175, 80, 0.3);
+            margin: 20px auto;
+        }
+        
+        .book-button:hover {
+            background: linear-gradient(135deg, #2E7D32, #4CAF50);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 12px rgba(76, 175, 80, 0.4);
+        }
+        
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+            gap: 10px;
+        }
+        
+        .page-indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #ccc;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .page-indicator.active {
+            background: #4a6491;
+            transform: scale(1.2);
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <!-- Premium Header -->
+    <div class="header-container">
+        <h1 class="heading">Premium Hotel Collection</h1>
+        <p class="subheading">Discover your perfect stay with our curated selection of luxury hotels</p>
+    </div>
+    
+    <!-- Hotel Pages -->
+    <div class="hotel-page active" id="hotel1">
+        <div class="hotel-header">
+            <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Grand Plaza Hotel" class="hotel-main-image">
+            <div class="hotel-info">
+                <h2 class="hotel-name">Grand Plaza Hotel</h2>
+                <div class="location">
+                    <i class="fas fa-map-marker-alt"></i> 123 Ocean View, Miami Beach, FL
+                </div>
+                <div class="rating">
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <div class="price">$249<small>/night</small></div>
+                </div>
+                <p class="description">
+                    Experience unparalleled luxury at the Grand Plaza Hotel, located directly on Miami Beach. Our award-winning property features stunning ocean views, world-class amenities, and exceptional service. Enjoy our infinity pool, full-service spa, and four on-site restaurants offering cuisine from around the world.
+                </p>
+            </div>
+        </div>
+        
+        <div class="gallery">
+            <img src="https://images.unsplash.com/photo-1535827841776-24af3b9d0a6c?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Hotel Pool" class="gallery-image">
+            <img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Hotel Room" class="gallery-image">
+            <img src="https://images.unsplash.com/photo-1537047902294-62a40c20a6ae?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Hotel Restaurant" class="gallery-image">
+            <img src="https://images.unsplash.com/photo-1596178065887-1198b6148b2b?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Hotel Spa" class="gallery-image">
+        </div>
+        
+        <div class="amenities-section">
+            <h3 class="section-title">Amenities</h3>
+            <div class="amenities">
+                <span class="amenity"><i class="fas fa-wifi"></i> Free WiFi</span>
+                <span class="amenity"><i class="fas fa-swimming-pool"></i> Infinity Pool</span>
+                <span class="amenity"><i class="fas fa-spa"></i> Full-service Spa</span>
+                <span class="amenity"><i class="fas fa-utensils"></i> 4 Restaurants</span>
+                <span class="amenity"><i class="fas fa-dumbbell"></i> Fitness Center</span>
+                <span class="amenity"><i class="fas fa-concierge-bell"></i> 24/7 Concierge</span>
+                <span class="amenity"><i class="fas fa-parking"></i> Valet Parking</span>
+                <span class="amenity"><i class="fas fa-cocktail"></i> Rooftop Bar</span>
+            </div>
+        </div>
+        
+        <button class="book-button">
+            <i class="fas fa-calendar-check"></i> Book Now
+        </button>
+    </div>
+    
+    <div class="hotel-page" id="hotel2">
+        <div class="hotel-header">
+            <img src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Urban Boutique Hotel" class="hotel-main-image">
+            <div class="hotel-info">
+                <h2 class="hotel-name">Urban Boutique Hotel</h2>
+                <div class="location">
+                    <i class="fas fa-map-marker-alt"></i> 456 Downtown, New York, NY
+                </div>
+                <div class="rating">
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="far fa-star"></i>
+                    </div>
+                    <div class="price">$189<small>/night</small></div>
+                </div>
+                <p class="description">
+                    The Urban Boutique Hotel offers a chic, contemporary retreat in the heart of Manhattan. Our stylish rooms feature floor-to-ceiling windows with stunning city views. Enjoy our rooftop lounge, fitness center, and complimentary breakfast. Perfect for both business travelers and tourists looking to experience New York in style.
+                </p>
+            </div>
+        </div>
+        
+        <div class="gallery">
+            <img src="https://images.unsplash.com/photo-1566669437688-e85a2954f67d?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Hotel Lobby" class="gallery-image">
+            <img src="https://images.unsplash.com/photo-1568084680786-a84f91d1153c?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Hotel Room" class="gallery-image">
+            <img src="https://images.unsplash.com/photo-1551632436-cbf8dd35adfa?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Hotel Gym" class="gallery-image">
+            <img src="https://images.unsplash.com/photo-1514933651103-005eec06c04b?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Hotel Restaurant" class="gallery-image">
+        </div>
+        
+        <div class="amenities-section">
+            <h3 class="section-title">Amenities</h3>
+            <div class="amenities">
+                <span class="amenity"><i class="fas fa-wifi"></i> Free WiFi</span>
+                <span class="amenity"><i class="fas fa-dumbbell"></i> Fitness Center</span>
+                <span class="amenity"><i class="fas fa-glass-martini-alt"></i> Rooftop Bar</span>
+                <span class="amenity"><i class="fas fa-utensils"></i> Complimentary Breakfast</span>
+                <span class="amenity"><i class="fas fa-business-time"></i> Business Center</span>
+                <span class="amenity"><i class="fas fa-concierge-bell"></i> Concierge</span>
+                <span class="amenity"><i class="fas fa-luggage-cart"></i> Luggage Storage</span>
+                <span class="amenity"><i class="fas fa-coffee"></i> Coffee Shop</span>
+            </div>
+        </div>
+        
+        <button class="book-button">
+            <i class="fas fa-calendar-check"></i> Book Now
+        </button>
+    </div>
+    
+    <!-- Pagination Indicators -->
+    <div class="pagination" id="pagination">
+        <div class="page-indicator active" data-target="#hotel1"></div>
+        <div class="page-indicator" data-target="#hotel2"></div>
+        <div class="page-indicator" data-target="#hotel3"></div>
+        <div class="page-indicator" data-target="#hotel4"></div>
+        <div class="page-indicator" data-target="#hotel5"></div>
+        <div class="page-indicator" data-target="#hotel6"></div>
+    </div>
+    
+    <!-- Action Buttons -->
+    <div class="action-buttons">
+        <a href="#hotel1" class="nav-button" id="backButton">
+            <i class="fas fa-arrow-left"></i> Back
+        </a>
+        <a href="#hotel2" class="nav-button" id="nextButton">
+            Next <i class="fas fa-arrow-right"></i>
+        </a>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const hotelPages = document.querySelectorAll('.hotel-page');
+            const pageIndicators = document.querySelectorAll('.page-indicator');
+            const backButton = document.getElementById('backButton');
+            const nextButton = document.getElementById('nextButton');
+            
+            let currentPageIndex = 0;
+            
+            // Function to show specific page
+            function showPage(index) {
+                // Hide all pages
+                hotelPages.forEach(page => page.classList.remove('active'));
+                // Show selected page
+                hotelPages[index].classList.add('active');
+                
+                // Update pagination indicators
+                pageIndicators.forEach(indicator => indicator.classList.remove('active'));
+                pageIndicators[index].classList.add('active');
+                
+                // Update current page index
+                currentPageIndex = index;
+                
+                // Update navigation buttons
+                updateNavButtons();
+            }
+            
+            // Function to update navigation buttons
+            function updateNavButtons() {
+                // Update back button
+                if (currentPageIndex === 0) {
+                    backButton.style.visibility = 'hidden';
+                } else {
+                    backButton.style.visibility = 'visible';
+                    backButton.href = `#hotel${currentPageIndex}`;
+                }
+                
+                // Update next button
+                if (currentPageIndex === hotelPages.length - 1) {
+                    nextButton.style.visibility = 'hidden';
+                } else {
+                    nextButton.style.visibility = 'visible';
+                    nextButton.href = `#hotel${currentPageIndex + 2}`;
+                }
+            }
+            
+            // Click handler for pagination indicators
+            pageIndicators.forEach((indicator, index) => {
+                indicator.addEventListener('click', function() {
+                    showPage(index);
+                    window.location.href = `#hotel${index + 1}`;
+                });
+            });
+            
+            // Handle hash changes for direct linking
+            window.addEventListener('hashchange', function() {
+                const hash = window.location.hash;
+                if (hash) {
+                    const pageNumber = parseInt(hash.replace('#hotel', '')) - 1;
+                    if (!isNaN(pageNumber) {
+                        showPage(pageNumber);
+                    }
+                }
+            });
+            
+            // Initialize
+            if (window.location.hash) {
+                const pageNumber = parseInt(window.location.hash.replace('#hotel', '')) - 1;
+                if (!isNaN(pageNumber) {
+                    showPage(pageNumber);
+                }
+            } else {
+                showPage(0);
+            }
+        });
+    </script>
+</body>
+</html>

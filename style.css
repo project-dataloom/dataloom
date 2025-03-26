@@ -1,0 +1,540 @@
+
+body {
+    background-color: white;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: white;
+
+    padding: 20px;
+}
+
+/* logo section is here */
+
+:root {
+    --primary-blue: #1e88e5;
+    --dark-blue: #0d47a1;
+}
+
+.logo-container {
+    display: inline-block;
+    height: 50px;
+    width: 50px;
+    position: relative;
+    margin-right: 15px;
+}
+
+.logo-icon {
+    position: absolute;
+    font-size: 2rem;
+    color: var(--dark-blue);
+    transition: all 0.5s ease;
+    opacity: 0;
+}
+
+.logo-icon.active {
+    opacity: 1;
+}
+
+.navbar-brand {
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+    color: var(--dark-blue);
+}
+
+
+.section-padding{
+    padding-top: 100px;
+    padding-bottom: 100px;
+
+}
+.overlay {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+}
+.login-box {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    justify-self: center;
+    margin-top: 300px;
+    width: 600px;
+    height: 300px;
+}
+.hidden {
+    display: none;
+}
+
+.navbar-nav .nav-item {
+    margin: 0 15px;
+}
+.navbar-nav .nav-item .nav-link {
+    position: relative;
+    padding-bottom: 5px;
+
+    
+}
+.navbar-nav .nav-item .nav-link:hover {
+    border-bottom: 2px solid darkblue;
+}
+
+
+.logo{
+    max-width: 50%;
+    max-height: 50%;
+}
+.TravelPlannerLogo{
+    padding-left: -20px;
+}
+
+/* Responsive Styles */
+@media (max-width: 992px) {
+    .navbar-nav .nav-item {
+        margin: 5px 0;
+        text-align: center;
+    }
+}
+
+/* homr page  */
+
+/* .#home-sectionre{
+    padding-left: 200px;
+
+} */
+.home-section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1400px;
+    margin: auto;
+    margin-top: 100px;
+    padding: 200px;
+    padding: 80px 20px;
+    background-color: white;
+    border-radius: 20px;
+
+}
+.text-content {
+    max-width: 50%;
+}
+.text-content h1 {
+    font-size: 48px;
+    font-weight: bold;
+    line-height: 1.2;
+    margin-bottom: 20px;
+}
+.description {
+    font-size: 20px;
+    color: black;
+    margin-bottom: 30px;
+}
+.btn-primary {
+    background-color: black;
+    border: none;
+    color: #6C86FF;
+    padding: 12px 24px;
+    font-size: 18px;
+    border-radius: 10px;
+}
+.btn-primary :hover{
+    background-color: #6C86FF;
+    color: black;
+}
+.image-content img {
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+}
+
+
+
+/* .header {
+    text-align: center;
+    padding: 50px 20px;
+    background-color: #6C86FF;
+}
+.header h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #333;
+}
+.header p {
+    font-size: 1.2rem;
+    color: #666;
+} */
+/* three box styling */
+
+
+/* Box Section */
+
+@keyframes scrollreval{
+    from{
+        opacity: 0;
+        scale: 0.5;
+    }
+    to{
+        opacity: 1;
+        scale: 1;
+    }
+}
+/* boxes like solo,family,bussiness trip */
+.box {
+    width: 100%;
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    text-align: center;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, background-color 0.3s, box-shadow 0.3s;
+    cursor: pointer;
+    margin: 10px;
+    background-color: #000;
+}
+.box:hover {
+    transform: scale(1.05);
+    background-color: #f0ad4e;
+    color: white;
+}
+.box.selected {
+    transform: scale(1.2);
+    background-color: #f8b400;
+    color: white;
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+    z-index: 10;
+}
+.middle-button button {
+    background-color: black;
+    color: white;
+    border: none;
+    padding: 10px 50px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    opacity: 0.5;
+    pointer-events: none;
+    margin-left: 45%;
+}
+.middle-button button.enabled {
+    opacity: 1;
+    pointer-events: all;
+}
+.middle-button button:hover {
+    background-color: #f8b400;
+    color: black;
+}
+
+
+
+
+
+/* Google Translate Styling */
+.goog-te-gadget {
+    color: white !important;
+    padding: 5px;
+}
+
+
+/* video section here  */
+
+
+.video-section {
+    text-align: center;
+    margin-top: 0px;
+    padding: 0px;
+    padding-top: 60px;
+    padding-bottom: 20px;
+    margin-top: 50px;
+    margin-bottom: 100px;
+    border-radius: 20px;
+    
+    background-color: white;
+}
+
+.videotag{
+    border-radius: 10px;
+}
+#containerv{
+    width: 100%;
+    padding: 0px 50px;
+
+}
+
+.section-title{
+	margin-bottom: 60px;
+	
+
+}
+.section-title .line{
+	width: 80px;
+	height: 4px;
+	background-color: #6C86FF;
+	margin: 16px auto 24px auto;
+}
+
+
+
+@keyframes scrollreval{
+    from{
+        opacity: 0;
+        scale: 0.5;
+    }
+    to{
+        opacity: 1;
+        scale: 1;
+    }
+}
+
+
+/* footer section here  */
+ /* Footer Styling */
+ footer {
+    background-color: #000;
+    color: #fff;
+    padding: 60px 0;
+}
+footer h5 {
+    font-size: 18px;
+    color: #6C86FF;
+    margin-bottom: 20px;
+}
+footer a {
+    color: #ccc;
+    text-decoration: none;
+    transition: 0.3s;
+}
+footer a:hover {
+    color: #00ffc6;
+    text-decoration: underline;
+}
+.footer-links li {
+    margin-bottom: 10px;
+}
+.footer-links a {
+    display: block;
+}
+
+/* Newsletter Form */
+.newsletter input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+}
+.newsletter button {
+    padding: 10px 20px;
+    background-color: #00adb5;
+    border: none;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+    border-radius: 5px;
+    width: 100%;
+}
+.newsletter button:hover {
+    background-color: #00ffc6;
+}
+
+/* Social Media Icons */
+.social-icons a {
+    color: #6C86FF;
+    font-size: 20px;
+    margin: 0 10px;
+    transition: 0.3s;
+}
+.social-icons a:hover {
+    color: #00ffc6;
+}
+
+/* Copyright */
+.copyright {
+    text-align: center;
+    padding: 20px;
+    background: #0f3460;
+    color: #ccc;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .footer-section {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+    .newsletter input {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    .newsletter button {
+        width: 100%;
+    }
+}
+
+
+
+/* 
+popular plans section is here */
+
+  
+
+        .pricing-container {
+            display: flex;
+            flex-direction: row; /* Explicit row direction */
+            flex-wrap: wrap;
+            justify-content:space-around;
+            gap: 20px;
+            width: 100%;
+            max-width: 100%;
+            padding: 100px;
+            margin: 20px;
+            
+        }
+        
+        .plan-card {
+            background: white;
+            border-radius: 10px;
+            padding: 10px 30px;
+            flex: 2;
+            min-width: 200px;
+            max-width: 350px;
+            
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 6px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border: 1px solid #e0e0e0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .plan-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2), 0 15px 30px rgba(0, 0, 0, 0.2);
+            z-index: 10;
+        }
+
+        .plan-card.popular {
+            border: 2px solid #4a6bff;
+            position: relative;
+        }
+
+        .popular-tag {
+            position: absolute;
+            top: -12px;
+            right: 20px;
+            background-color: #4a6bff;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .plan-card h2 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 1.5rem;
+            text-align: center;
+        }
+
+        .plan-card p.description {
+            color: #666;
+            margin-bottom: 20px;
+            line-height: 1.5;
+            text-align: center;
+            min-height: 60px;
+        }
+
+        .plan-card .price {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #4a6bff;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .plan-card .price span {
+            font-size: 1rem;
+            color: #888;
+            font-weight: normal;
+        }
+
+        .plan-card .features {
+            margin-bottom: 30px;
+            flex-grow: 1;
+        }
+
+        .plan-card .features li {
+            list-style-type: none;
+            padding: 8px 0;
+            color: #555;
+            border-bottom: 1px solid #eee;
+        }
+
+        .plan-card .features li:before {
+            content: "✓";
+            color: #4a6bff;
+            margin-right: 10px;
+            font-weight: bold;
+        }
+
+        .plan-card button {
+            width: 100%;
+            padding: 12px;
+            background-color: #4a6bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-weight: 600;
+            margin-top: auto;
+        }
+
+        .plan-card button:hover {
+            background-color: #3a5bef;
+        }
+
+        @media (max-width: 900px) {
+            .pricing-container {
+                flex-direction: row;
+                gap: 15px;
+            }
+            .plan-card {
+                min-width: 240px;
+                padding: 20px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .pricing-container {
+                flex-direction: row;
+                align-items: center;
+            }
+            .plan-card {
+                max-width: 50%;
+                width: 50%;
+            }
+        }

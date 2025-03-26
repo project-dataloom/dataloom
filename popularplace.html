@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel Website</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-blue: #1e88e5;
+            --dark-blue: #0d47a1;
+        }
+        
+        .logo-container {
+            display: inline-block;
+            height: 50px;
+            width: 50px;
+            position: relative;
+            margin-right: 15px;
+        }
+        
+        .logo-icon {
+            position: absolute;
+            font-size: 2rem;
+            color: var(--dark-blue);
+            transition: all 0.5s ease;
+            opacity: 0;
+        }
+        
+        .logo-icon.active {
+            opacity: 1;
+        }
+        
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+            font-weight: bold;
+            color: var(--dark-blue);
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <div class="logo-container">
+                    <i class="logo-icon fas fa-plane" id="plane-icon"></i>
+                    <i class="logo-icon fas fa-bus" id="bus-icon"></i>
+                    <i class="logo-icon fas fa-train" id="train-icon"></i>
+                </div>
+                TravelEase
+            </a>
+        </div>
+    </nav>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Animation timing variables
+            const fadeDuration = 500;
+            const displayDuration = 2000;
+            const totalCycleTime = fadeDuration*4 + displayDuration*3;
+            
+            function animatePlane() {
+                $('#plane-icon').addClass('active').fadeIn(fadeDuration);
+                setTimeout(function() {
+                    $('#plane-icon').removeClass('active').fadeOut(fadeDuration, animateBus);
+                }, displayDuration);
+            }
+            
+            function animateBus() {
+                $('#bus-icon').addClass('active').fadeIn(fadeDuration);
+                setTimeout(function() {
+                    $('#bus-icon').removeClass('active').fadeOut(fadeDuration, animateTrain);
+                }, displayDuration);
+            }
+            
+            function animateTrain() {
+                $('#train-icon').addClass('active').fadeIn(fadeDuration);
+                setTimeout(function() {
+                    $('#train-icon').removeClass('active').fadeOut(fadeDuration, animatePlane);
+                }, displayDuration);
+            }
+            
+            // Start the animation cycle
+            animatePlane();
+            
+            // Safety check to prevent stacking
+            let animationRunning = false;
+            function safeAnimate() {
+                if (!animationRunning) {
+                    animationRunning = true;
+                    animatePlane();
+                }
+            }
+            
+            // Backup interval to prevent stalls
+            setInterval(safeAnimate, totalCycleTime + 1000);
+        });
+    </script>
+</body>
+</html>

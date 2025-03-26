@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium Bus Travel</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f8f9fa;
+        }
+        
+        .header-container {
+            background: linear-gradient(135deg, #2c3e50, #4a6491);
+            color: white;
+            padding: 25px 30px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header-container::after {
+            content: "";
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 100%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
+            transform: rotate(30deg);
+        }
+        
+        .heading {
+            font-size: 32px;
+            font-weight: 700;
+            margin: 0;
+            letter-spacing: 1px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .subheading {
+            font-size: 16px;
+            opacity: 0.9;
+            margin-top: 8px;
+            font-weight: 300;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .bus-container {
+            display: flex;
+            gap: 25px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+        
+        .bus-box {
+            flex: 1;
+            min-width: 300px;
+            display: flex;
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-left: 4px solid #4a6491;
+        }
+        
+        .bus-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+        }
+        
+        .bus-image {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            margin-right: 25px;
+            border-radius: 6px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        .bus-details {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .route {
+            font-weight: 600;
+            margin-bottom: 8px;
+            font-size: 20px;
+            color: #2c3e50;
+        }
+        
+        .route span {
+            color: #4a6491;
+            font-weight: 700;
+        }
+        
+        .dates {
+            color: #555;
+            margin-bottom: 8px;
+            font-size: 15px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .dates i {
+            margin-right: 5px;
+            color: #4a6491;
+        }
+        
+        .hotel-timing {
+            color: #555;
+            margin-bottom: 15px;
+            font-size: 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .hotel-timing i {
+            margin-right: 8px;
+            color: #4a6491;
+        }
+        
+        .book-button {
+            align-self: flex-start;
+            background: linear-gradient(135deg, #4a6491, #2c3e50);
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            font-size: 15px;
+            margin-top: auto;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            box-shadow: 0 3px 8px rgba(74, 100, 145, 0.3);
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+        
+        .book-button:hover {
+            background: linear-gradient(135deg, #2c3e50, #4a6491);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 12px rgba(74, 100, 145, 0.4);
+        }
+        
+        .book-button i {
+            margin-right: 8px;
+        }
+        
+        .rating {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .stars {
+            color: #FFD700;
+            margin-right: 10px;
+        }
+        
+        .price {
+            font-size: 22px;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-left: auto;
+        }
+        
+        .page-navigation {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 40px 0 20px;
+        }
+        
+        .page-button {
+            padding: 12px 30px;
+            background: linear-gradient(135deg, #4a6491, #2c3e50);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            box-shadow: 0 3px 8px rgba(74, 100, 145, 0.3);
+            display: flex;
+            align-items: center;
+        }
+        
+        .page-button:hover {
+            background: linear-gradient(135deg, #2c3e50, #4a6491);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 12px rgba(74, 100, 145, 0.4);
+        }
+        
+        .page-button i {
+            margin: 0 8px;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <!-- Premium Header -->
+    <div class="header-container">
+        <h1 class="heading">Available Buses</h1>
+        <p class="subheading">Experience luxury travel with our premium bus services</p>
+    </div>
+    
+    <!-- First Bus Container Row -->
+    <div class="bus-container">
+        <!-- First Bus Box -->
+        <div class="bus-box">
+            <img src="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?ixlib=rb-1.2.1&auto=format&fit=crop&w=150&q=80" alt="Premium Bus" class="bus-image">
+            <div class="bus-details">
+                <div class="rating">
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <div class="price">$129.99</div>
+                </div>
+                <div class="route"><span>New York</span> → <span>Washington DC</span></div>
+                <div class="dates">
+                    <span><i class="far fa-calendar-alt"></i> Start: May 15, 2023</span>
+                    <span><i class="far fa-calendar-alt"></i> End: May 17, 2023</span>
+                </div>
+                <div class="hotel-timing">
+                    <i class="fas fa-hotel"></i> Hotels open: 6:00 AM - Close: 10:00 PM
+                </div>
+                <a href="#book-now" class="book-button">
+                    <i class="fas fa-ticket-alt"></i> Book Now
+                </a>
+            </div>
+        </div>
+        
+        <!-- Second Bus Box -->
+        <div class="bus-box">
+            <img src="https://images.unsplash.com/photo-1509744645303-3bc8e0e4c1a3?ixlib=rb-1.2.1&auto=format&fit=crop&w=150&q=80" alt="Luxury Bus" class="bus-image">
+            <div class="bus-details">
+                <div class="rating">
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="far fa-star"></i>
+                    </div>
+                    <div class="price">$149.99</div>
+                </div>
+                <div class="route"><span>Los Angeles</span> → <span>San Francisco</span></div>
+                <div class="dates">
+                    <span><i class="far fa-calendar-alt"></i> Start: May 20, 2023</span>
+                    <span><i class="far fa-calendar-alt"></i> End: May 22, 2023</span>
+                </div>
+                <div class="hotel-timing">
+                    <i class="fas fa-hotel"></i> Hotels open: 5:30 AM - Close: 11:00 PM
+                </div>
+                <a href="#book-now" class="book-button">
+                    <i class="fas fa-ticket-alt"></i> Book Now
+                </a>
+            </div>
+        </div>
+        
+        <!-- Third Bus Box -->
+        <div class="bus-box">
+            <img src="https://images.unsplash.com/photo-1509744645303-3bc8e0e4c1a3?ixlib=rb-1.2.1&auto=format&fit=crop&w=150&q=80" alt="Luxury Bus" class="bus-image">
+            <div class="bus-details">
+                <div class="rating">
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="far fa-star"></i>
+                    </div>
+                    <div class="price">$159.99</div>
+                </div>
+                <div class="route"><span>Chicago</span> → <span>Boston</span></div>
+                <div class="dates">
+                    <span><i class="far fa-calendar-alt"></i> Start: May 25, 2023</span>
+                    <span><i class="far fa-calendar-alt"></i> End: May 27, 2023</span>
+                </div>
+                <div class="hotel-timing">
+                    <i class="fas fa-hotel"></i> Hotels open: 7:00 AM - Close: 9:00 PM
+                </div>
+                <a href="#book-now" class="book-button">
+                    <i class="fas fa-ticket-alt"></i> Book Now
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Second Bus Container Row -->
+    <div class="bus-container">
+        <!-- Fourth Bus Box -->
+        <div class="bus-box">
+            <img src="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?ixlib=rb-1.2.1&auto=format&fit=crop&w=150&q=80" alt="Premium Bus" class="bus-image">
+            <div class="bus-details">
+                <div class="rating">
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <div class="price">$139.99</div>
+                </div>
+                <div class="route"><span>Seattle</span> → <span>Portland</span></div>
+                <div class="dates">
+                    <span><i class="far fa-calendar-alt"></i> Start: June 1, 2023</span>
+                    <span><i class="far fa-calendar-alt"></i> End: June 3, 2023</span>
+                </div>
+                <div class="hotel-timing">
+                    <i class="fas fa-hotel"></i> Hotels open: 6:00 AM - Close: 10:00 PM
+                </div>
+                <a href="#book-now" class="book-button">
+                    <i class="fas fa-ticket-alt"></i> Book Now
+                </a>
+            </div>
+        </div>
+        
+        <!-- Fifth Bus Box -->
+        <div class="bus-box">
+            <img src="https://images.unsplash.com/photo-1509744645303-3bc8e0e4c1a3?ixlib=rb-1.2.1&auto=format&fit=crop&w=150&q=80" alt="Luxury Bus" class="bus-image">
+            <div class="bus-details">
+                <div class="rating">
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="far fa-star"></i>
+                    </div>
+                    <div class="price">$169.99</div>
+                </div>
+                <div class="route"><span>Miami</span> → <span>Orlando</span></div>
+                <div class="dates">
+                    <span><i class="far fa-calendar-alt"></i> Start: June 5, 2023</span>
+                    <span><i class="far fa-calendar-alt"></i> End: June 7, 2023</span>
+                </div>
+                <div class="hotel-timing">
+                    <i class="fas fa-hotel"></i> Hotels open: 5:30 AM - Close: 11:00 PM
+                </div>
+                <a href="#book-now" class="book-button">
+                    <i class="fas fa-ticket-alt"></i> Book Now
+                </a>
+            </div>
+        </div>
+        
+        <!-- Sixth Bus Box -->
+        <div class="bus-box">
+            <img src="https://images.unsplash.com/photo-1509744645303-3bc8e0e4c1a3?ixlib=rb-1.2.1&auto=format&fit=crop&w=150&q=80" alt="Luxury Bus" class="bus-image">
+            <div class="bus-details">
+                <div class="rating">
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="far fa-star"></i>
+                    </div>
+                    <div class="price">$179.99</div>
+                </div>
+                <div class="route"><span>Dallas</span> → <span>Houston</span></div>
+                <div class="dates">
+                    <span><i class="far fa-calendar-alt"></i> Start: June 10, 2023</span>
+                    <span><i class="far fa-calendar-alt"></i> End: June 12, 2023</span>
+                </div>
+                <div class="hotel-timing">
+                    <i class="fas fa-hotel"></i> Hotels open: 6:30 AM - Close: 10:30 PM
+                </div>
+                <a href="#book-now" class="book-button">
+                    <i class="fas fa-ticket-alt"></i> Book Now
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Page Navigation Buttons at the End -->
+    <div class="page-navigation">
+        <button class="page-button">
+            <i class="fas fa-arrow-left"></i> Back
+        </button>
+        <button class="page-button">
+            Generate Trip <i class="fas fa-arrow-right"></i>
+        </button>
+    </div>
+
+    <!-- Book Now Anchor Section -->
+    <div id="book-now" style="height: 50px;"></div>
+</body>
+</html>
