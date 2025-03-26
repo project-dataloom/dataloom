@@ -85,7 +85,7 @@
 
 
           <!-- Header Section -->
-<section id="trip" class="section-padding">
+< id="trip" class="section-padding">
 
 
     <div class="container">
@@ -108,33 +108,34 @@
 
 
     <!-- Three Boxes Section -->
-<div class="container my-5">
-    <div class="row text-center" id="ani">
-        <div class="col-md-4">
-            <div class="box" data-box="1" data-link="solopage.html">
-                <img src="Asserts/soloimg.png" alt="Solo Travel">
-                <h3>Solo Travel</h3>
+            <!-- Three Boxes Section -->
+            <div class="container my-5">
+                <div class="row text-center" id="ani">
+                    <div class="col-md-4">
+                        <div class="box" data-box="1" data-link="solopage.html">
+                            <img src="Asserts/sample.jpg" alt="Solo Travel">
+                            <h3>Solo Travel</h3>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="box" data-box="2" data-link="familypage.html">
+                            <img src="Asserts/sample.jpg" alt="Family Travel">
+                            <h3>Family Travel</h3>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="box" data-box="3" data-link="businesspage.html">
+                            <img src="Asserts/soloimg.png" alt="Business Travel">
+                            <h3>Business Travel</h3>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="col-md-4">
-            <div class="box" data-box="2" data-link="familypage.html">
-                <img src="Asserts/sample.jpg" alt="Family Travel">
-                <h3>Family Travel</h3>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="box" data-box="3" data-link="BusinessTrip.html">
-                <img src="Asserts/soloimg.png" alt="Business Travel">
-                <h3>Business Travel</h3>
-            </div>
-        </div>
-    </div>
-</div>
 
-<!-- Middle Button -->
-<div class="middle-button">
-    <button id="readMoreBtn" disabled>Read More</button>
-</div>
+            <!-- Middle Button -->
+            <div class="middle-button">
+                <button id="readMoreBtn" disabled>Read More</button>
+            </div>
     </section>
 
 
@@ -302,21 +303,21 @@
 
 <script>
     $(document).ready(function(){
-        let selectedLink = "";
-        
-        $(".box").click(function(){
-            $(".box").removeClass("selected");
-            $(this).addClass("selected");
-            selectedLink = $(this).data("link");
-            $("#readMoreBtn").prop("disabled", false).addClass("enabled");
-        });
+            let selectedLink = "";
+            
+            $(".box").click(function(){
+                $(".box").not(this).removeClass("selected");
+                $(this).toggleClass("selected");
+                selectedLink = $(this).hasClass("selected") ? $(this).data("link") : "";
+                $("#readMoreBtn").prop("disabled", !$(this).hasClass("selected")).toggleClass("enabled", $(this).hasClass("selected"));
+            });
 
-        $("#readMoreBtn").click(function(){
-            if (selectedLink) {
-                window.location.href = selectedLink;
-            }
+            $("#readMoreBtn").click(function(){
+                if (selectedLink) {
+                    window.location.href = selectedLink;
+                }
+            });
         });
-    });
 
  
 </script>
